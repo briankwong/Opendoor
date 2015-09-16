@@ -59,7 +59,7 @@ In command line, run:
 
 Usage
 ------------------------------------
-URL: http://127.0.0.1:8000?listings?min_price=100000&max_price=200000&min_bed=2&max_bed=2&min_bath=2&max_bath=2
+URL: ``http://127.0.0.1:8000?listings?min_price=100000&max_price=200000&min_bed=2&max_bed=2&min_bath=2&max_bath=2``
 
 .. code-block:: python
 
