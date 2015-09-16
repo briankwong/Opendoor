@@ -74,7 +74,7 @@ URL: ``http://127.0.0.1:8000?listings?min_price=100000&max_price=200000&min_bed=
 All query parameters are optional, all minimum and maximum fields are
 inclusive (e.g. ``min_bed=2&max_bed=4`` should return listings with 2, 3, or 4 bedrooms).
 
-.. code-block::python
+.. code-block:: python
 
     {
         "type": "FeatureCollection",
