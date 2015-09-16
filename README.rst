@@ -55,6 +55,7 @@ Run Server
 In command line, run:
 
 .. code-block:: bash
+
     python manage.py runserver
 
 Usage
