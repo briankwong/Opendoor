@@ -6,6 +6,7 @@ Prerequisite
 This project is developed based on ``Django Framework`` and ``Django REST Framework``:
 
 .. code-block:: bash
+
     sudo pip install django
     sudo pip install djangorestframework
     sudo pip install django-filter
@@ -17,6 +18,7 @@ A local copy is stored in ``TakeHomeProblem/listings/data/listings.csv``
 
 Raw data has been migrated to Table ``listings_house`` in ``opendoor.db``:
 .. code-block:: bash
+
     python manage.py migrate
     python manage.py makemigrations listings
     python manage.py sqlmigrate listings 0001
@@ -24,6 +26,7 @@ Raw data has been migrated to Table ``listings_house`` in ``opendoor.db``:
 
 Table ``listings_house`` definition:
 .. code-block:: python
+
     operations = [
         migrations.CreateModel(
             name='House',
@@ -65,6 +68,7 @@ Result is paginated via web linking with ``page_size = 50``. To edit the page si
 please update ``TakeHomeProblem/TakeHomeProblem/settings.py``
 
 .. code-block:: python
+
     REST_FRAMEWORK = {
         ...
         'PAGE_SIZE': 50
