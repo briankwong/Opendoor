@@ -4,6 +4,7 @@ import csv
 '''
 Convert house information records in a CSV file to SQLite DB
 Table columns: id,street,status,price,bedrooms,bathrooms,sq_ft,lat,lng
+Raw data: https://s3.amazonaws.com/opendoor-problems/listings.csv
 Run: python cvs2sqlite.py
 '''
 def main():

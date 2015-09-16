@@ -1,9 +1,10 @@
-Opendoor Take Home Problem: listings
+Take Home Problem: Listings
 ====================================
 
 Prerequisite
 ------------------------------------
-This project is developed based on ``Django Framework`` and ``Django REST Framework``:
+This simple project is developed based on ``Django Framework``
+and ``Django REST Framework``:
 
 .. code-block:: bash
 
@@ -11,13 +12,19 @@ This project is developed based on ``Django Framework`` and ``Django REST Framew
     sudo pip install djangorestframework
     sudo pip install django-filter
 
-DataStore
+Folder Organization
+------------------------------------
+* ``TakeHomeProblem``: project settings
+* ``listings``: source codes for ``listings`` server
+* ``cvs2sqlite.py``: process raw house info and populate the database
+
+DataStore (SQLite)
 ------------------------------------
 Raw data: https://s3.amazonaws.com/opendoor-problems/listings.csv
 
 A local copy is stored in ``listings/data/listings.csv``
 
-Raw data has been migrated to Table ``listings_house`` in ``opendoor.db``:
+Raw data has been migrated to ``listings_house`` in ``opendoor.db``:
 
 .. code-block:: bash
 
@@ -26,26 +33,8 @@ Raw data has been migrated to Table ``listings_house`` in ``opendoor.db``:
     python manage.py sqlmigrate listings 0001
     python cvs2sqlite.py
 
-Table ``listings_house`` definition:
-
-.. code-block:: python
-
-    operations = [
-        migrations.CreateModel(
-            name='House',
-            fields=[
-                ('id', models.CharField(max_length=40, serialize=False, primary_key=True)),
-                ('street', models.CharField(max_length=200)),
-                ('status', models.CharField(max_length=40)),
-                ('price', models.IntegerField()),
-                ('bedrooms', models.IntegerField()),
-                ('bathrooms', models.IntegerField()),
-                ('sq_ft', models.IntegerField()),
-                ('lat', models.FloatField()),
-                ('lng', models.FloatField()),
-            ],
-        ),
-    ]
+The schema of ``listings_house`` is defined in ``listings/migrations/0001_initial.py``,
+which is auto-generated from ``listings/models.py``.
 
 Notice that ``listings_house`` is indexed on ``id``. So if you run ``python cvs2sqlite.py``
 again, you will get errors like ``sqlite3.IntegrityError: UNIQUE constraint failed: listings_house.id``.
@@ -56,23 +45,25 @@ In command line, run:
 
 .. code-block:: bash
 
-    python manage.py runserver
+    python manage.py runserver [port]
 
-Usage
+The default value of ``port`` is ``8000``.
+
+Client Side Query
 ------------------------------------
-URL: ``http://127.0.0.1:8000?listings?min_price=100000&max_price=200000&min_bed=2&max_bed=2&min_bath=2&max_bath=2``
+Example URL: ``http://127.0.0.1:[port]/listings?min_price=100000&max_price=200000&min_bed=2&max_bed=2&min_bath=2&max_bath=2``
 
-.. code-block:: python
-
-    min_price: 'The minimum listing price in dollars'
-    max_price: 'The maximum listing price in dollars'
-    min_bed: 'The minimum number of bedrooms'
-    max_bed: 'The maximum number of bedrooms'
-    min_bath: 'The minimum number of bathrooms'
-    max_bath: 'The maximum number of bathrooms'
+* min_price: The minimum listing price in dollars
+* max_price: The maximum listing price in dollars
+* min_bed: The minimum number of bedrooms
+* max_bed: The maximum number of bedrooms
+* min_bath: The minimum number of bathrooms
+* max_bath: The maximum number of bathrooms
 
 All query parameters are optional, and all minimum and maximum fields are
-inclusive (e.g. ``min_bed=2&max_bed=4`` should return listings with 2, 3, or 4 bedrooms).
+inclusive (e.g. ``min_bed=2&max_bed=4`` should return houses with 2, 3, or 4 bedrooms).
+Data are **read-only** for unauthorized clients.
+
 Example result:
 
 .. code-block:: python
@@ -80,26 +71,26 @@ Example result:
     {
         "type": "FeatureCollection",
         "count": 431,
-        "next": "http://127.0.0.1:8000/listings?format=api&max_bath=2&max_bed=2&max_price=200000&min_bath=2&min_bed=2&min_price=100000&page=2",
-        "previous": null,
+        "next": "http://127.0.0.1:8000/listings?max_bath=2&max_bed=2&max_price=200000&min_bath=2&min_bed=2&min_price=100000&page=3",
+        "previous": "http://127.0.0.1:8000/listings?max_bath=2&max_bed=2&max_price=200000&min_bath=2&min_bed=2&min_price=100000",
         "features": [
             {
                 "type": "Feature",
                 "geometry": {
                     "type": "Point",
                     "coordinates": [
-                        33.45170447351804,
-                        -112.20395000768927
+                        33.437859864651166,
+                        -112.03801896441065
                     ]
                 },
                 "properties": {
-                    "status": "sold",
+                    "status": "active",
                     "bathrooms": 2,
-                    "sq_ft": 2279,
-                    "price": 181554,
+                    "sq_ft": 1942,
+                    "price": 110872,
                     "bedrooms": 2,
-                    "street": "389 2nd Dv",
-                    "id": "19"
+                    "street": "442 1st Cir",
+                    "id": "1226"
                 }
             },
             {
@@ -107,18 +98,18 @@ Example result:
                 "geometry": {
                     "type": "Point",
                     "coordinates": [
-                        33.568740034923174,
-                        -112.15817982971032
+                        33.48658345749951,
+                        -112.1183982309859
                     ]
                 },
                 "properties": {
-                    "status": "pending",
+                    "status": "active",
                     "bathrooms": 2,
-                    "sq_ft": 3145,
-                    "price": 157020,
+                    "sq_ft": 1292,
+                    "price": 196307,
                     "bedrooms": 2,
-                    "street": "566 Walnut Ave",
-                    "id": "85"
+                    "street": "685 5th Ave",
+                    "id": "1243"
                 }
             },
             ...
@@ -127,8 +118,10 @@ Example result:
 
 Pagination
 ------------------------------------
-Result is paginated via web linking with ``page_size = 50``. To edit the page size,
-please update ``TakeHomeProblem/settings.py``
+Results are paginated via web linking with ``page_size = 50``. You can follow
+``previous`` or ``next`` links in results to navigate through pages.
+
+To edit the default page size, please update ``TakeHomeProblem/settings.py``:
 
 .. code-block:: python
 
@@ -139,10 +132,10 @@ please update ``TakeHomeProblem/settings.py``
 
 Admin Page
 ------------------------------------
-Page: http://127.0.0.1:8000/admin
+Page: http://127.0.0.1:[port]/admin
 
 You can manage authentication and authorization of this website,
-and add/update/delete house records in the database.
+and add/update/delete house info in the database in the admin page.
 
 * User name: admin
 * Password: 123456
