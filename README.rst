@@ -74,6 +74,56 @@ URL: ``http://127.0.0.1:8000?listings?min_price=100000&max_price=200000&min_bed=
 All query parameters are optional, all minimum and maximum fields are
 inclusive (e.g. ``min_bed=2&max_bed=4`` should return listings with 2, 3, or 4 bedrooms).
 
+.. code-block::python
+
+    {
+        "type": "FeatureCollection",
+        "count": 431,
+        "next": "http://127.0.0.1:8000/listings?format=api&max_bath=2&max_bed=2&max_price=200000&min_bath=2&min_bed=2&min_price=100000&page=2",
+        "previous": null,
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        33.45170447351804,
+                        -112.20395000768927
+                    ]
+                },
+                "properties": {
+                    "status": "sold",
+                    "bathrooms": 2,
+                    "sq_ft": 2279,
+                    "price": 181554,
+                    "bedrooms": 2,
+                    "street": "389 2nd Dv",
+                    "id": "19"
+                }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        33.568740034923174,
+                        -112.15817982971032
+                    ]
+                },
+                "properties": {
+                    "status": "pending",
+                    "bathrooms": 2,
+                    "sq_ft": 3145,
+                    "price": 157020,
+                    "bedrooms": 2,
+                    "street": "566 Walnut Ave",
+                    "id": "85"
+                }
+            },
+            ...
+        ]
+    }
+
 Pagination
 ------------------------------------
 Result is paginated via web linking with ``page_size = 50``. To edit the page size,
