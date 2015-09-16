@@ -13,10 +13,11 @@ This project is developed based on ``Django Framework`` and ``Django REST Framew
 
 DataStore
 ------------------------------------
-`Raw data <https://s3.amazonaws.com/opendoor-problems/listings.csv>`
+Raw data: https://s3.amazonaws.com/opendoor-problems/listings.csv
 A local copy is stored in ``TakeHomeProblem/listings/data/listings.csv``
 
 Raw data has been migrated to Table ``listings_house`` in ``opendoor.db``:
+
 .. code-block:: bash
 
     python manage.py migrate
@@ -25,6 +26,7 @@ Raw data has been migrated to Table ``listings_house`` in ``opendoor.db``:
     python cvs2sqlite.py
 
 Table ``listings_house`` definition:
+
 .. code-block:: python
 
     operations = [
@@ -49,18 +51,26 @@ again, you will get errors like 'sqlite3.IntegrityError: UNIQUE constraint faile
 
 Run Server
 ------------------------------------
+
 .. code-block:: bash
     python manage.py runserver
 
 Usage
 ------------------------------------
 URL: http://127.0.0.1:8000?listings?min_price=100000&max_price=200000&min_bed=2&max_bed=2&min_bath=2&max_bath=2
+
 min_price: The minimum listing price in dollars
+
 max_price: The maximum listing price in dollars
+
 min_bed: The minimum number of bedrooms
+
 max_bed: The maximum number of bedrooms
+
 min_bath: The minimum number of bathrooms
+
 max_bath: The maximum number of bathrooms
+
 All query parameters are optional, all minimum and maximum fields are
 inclusive (e.g. min_bed=2&max_bed=4 should return listings with 2, 3, or 4 bedrooms).
 
