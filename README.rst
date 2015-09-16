@@ -71,8 +71,9 @@ URL: ``http://127.0.0.1:8000?listings?min_price=100000&max_price=200000&min_bed=
     min_bath: 'The minimum number of bathrooms'
     max_bath: 'The maximum number of bathrooms'
 
-All query parameters are optional, all minimum and maximum fields are
+All query parameters are optional, and all minimum and maximum fields are
 inclusive (e.g. ``min_bed=2&max_bed=4`` should return listings with 2, 3, or 4 bedrooms).
+Example result:
 
 .. code-block:: python
 
@@ -139,8 +140,9 @@ please update ``TakeHomeProblem/settings.py``
 Admin Page
 ------------------------------------
 Page: http://127.0.0.1:8000/admin
+
 You can manage authentication and authorization of this website,
 and add/update/delete house records in the database.
 
-User name: admin
-Password: 123456
+* User name: admin
+* Password: 123456
