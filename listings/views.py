@@ -65,7 +65,8 @@ class HouseFilter(django_filters.FilterSet):
             'min_bed',
             'max_bed',
             'min_bath',
-            'max_bath'
+            'max_bath',
+            'status',
         ]
 
 '''

@@ -56,7 +56,7 @@ The default value of ``port`` is ``8000``.
 
 Client Side Query
 ------------------------------------
-Example URL: ``http://127.0.0.1:[port]/listings?min_price=100000&max_price=200000&min_bed=2&max_bed=2&min_bath=2&max_bath=2``
+Example URL: ``http://127.0.0.1:[port]/listings?min_price=100000&max_price=200000&min_bed=2&max_bed=2&min_bath=2&max_bath=2&status=active``
 
 * ``min_price``: The minimum listing price in dollars
 * ``max_price``: The maximum listing price in dollars
@@ -64,6 +64,7 @@ Example URL: ``http://127.0.0.1:[port]/listings?min_price=100000&max_price=20000
 * ``max_bed``: The maximum number of bedrooms
 * ``min_bath``: The minimum number of bathrooms
 * ``max_bath``: The maximum number of bathrooms
+* ``status``: The status of listings
 
 All query parameters are optional, and all minimum and maximum fields are
 inclusive (e.g. ``min_bed=2&max_bed=4`` should return houses with 2, 3, or 4 bedrooms).
@@ -150,3 +151,11 @@ and add/update/delete house info in the database in the admin page.
 
 * User name: admin
 * Password: 123456
+
+Further Improvements
+------------------------------------
+The following features are very useful as further improvements:
+
+* Sort based on given parameters
+* Search by area
+
