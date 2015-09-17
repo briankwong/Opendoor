@@ -31,8 +31,8 @@ class FeatureSerializer(serializers.BaseSerializer):
                 ('geometry', {
                     'type': 'Point',
                     'coordinates': [
-                        obj.lat,
                         obj.lng,
+                        obj.lat,
                     ]
                 }),
                 ('properties', {
