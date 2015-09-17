@@ -84,8 +84,8 @@ Example result:
                 "geometry": {
                     "type": "Point",
                     "coordinates": [
-                        33.437859864651166,
                         -112.03801896441065
+                        33.437859864651166,
                     ]
                 },
                 "properties": {
@@ -103,8 +103,8 @@ Example result:
                 "geometry": {
                     "type": "Point",
                     "coordinates": [
-                        33.48658345749951,
                         -112.1183982309859
+                        33.48658345749951,
                     ]
                 },
                 "properties": {
