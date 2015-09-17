@@ -8,9 +8,10 @@ and ``Django REST Framework``:
 
 .. code-block:: bash
 
-    sudo pip install django
-    sudo pip install djangorestframework
-    sudo pip install django-filter
+    pip install django-toolbelt
+    pip install djangorestframework
+    pip install django-filter
+    pip install whitenoise
 
 Folder Organization
 ------------------------------------
