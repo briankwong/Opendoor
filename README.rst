@@ -122,7 +122,7 @@ To verify the result is GeoJSON compatible, please run:
 
 .. code-block:: bash
 
-    python listings/validator/validator.py [port]
+    python listings/validator/validator.py <URL> (e.g., 'http://127.0.0.1:8000/listings?max_bath=2')
 
 Pagination
 ------------------------------------
