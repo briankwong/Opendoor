@@ -16,7 +16,9 @@ Folder Organization
 ------------------------------------
 * ``TakeHomeProblem``: project settings.
 * ``listings``: source codes for ``listings`` server.
+
   * ``validator``: verify that results are GeoJSON compatible.
+
     *  ``library/geojson``: adapted ``geojson 1.3.0``.
 * ``cvs2sqlite.py``: process raw house info and populate the database.
 
