@@ -18,7 +18,6 @@ from django.contrib import admin
 from listings import views
 
 urlpatterns = [
-    url(r'^', views.HouseList.as_view()),
     url(r'^listings', views.HouseList.as_view()),
     url(r'^admin/', include(admin.site.urls)),
 ]
